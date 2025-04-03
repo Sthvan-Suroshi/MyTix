@@ -49,7 +49,7 @@ export const loginOrSignup = async (req, res) => {
     }
 
     const { accessToken, refreshToken } = generateToken(user.toObject());
-    res.status(200).json({
+    return res.status(200).json({
       user,
       accessToken,
       refreshToken,
@@ -57,7 +57,7 @@ export const loginOrSignup = async (req, res) => {
     });
   } catch (error) {
     console.error("Error logging in or signing up: ", error);
-    res.status(500).json({ error: "Error logging in or signing up" });
+    return res.status(500).json({ error: "Error logging in or signing up" });
   }
 };
 
@@ -79,12 +79,12 @@ export const refreshToken = async (req, res) => {
 
     const { accessToken, refreshToken } = generateToken(user.toObject());
 
-    res.status(200).json({
+    return res.status(200).json({
       accessToken,
       refreshToken,
     });
   } catch (error) {
     console.error("Error refreshing token: ", error);
-    res.status(500).json({ error: "Invalid or expired refresh token" });
+    return res.status(500).json({ error: "Invalid or expired refresh token" });
   }
 };

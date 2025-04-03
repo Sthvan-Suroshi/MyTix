@@ -14,9 +14,17 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
 
+//import routes
+import userRoutes from "./src/routes/user.js";
+import busRoutes from "./src/routes/bus.js";
+
+//use the routes
+app.use("/user", userRoutes);
+app.use("/bus", busRoutes);
+
+//start server function
 const start = async () => {
   try {
     await connect();
