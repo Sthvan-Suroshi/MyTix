@@ -20,7 +20,7 @@ const seatSchema = new mongoose.Schema({
 });
 
 const busSchema = new mongoose.Schema({
-  BusId: {
+  busId: {
     type: String,
     required: true,
     unique: true,
