@@ -60,7 +60,7 @@ const Bookings = () => {
       <TouchableOpacity
         onPress={() => refetch()}
         className="mt-4 px-4 py-2 bg-blue-500 rounded-sm">
-        <Text className="text-teal-500 mt-2">Retry</Text>
+        <Text className="text-blue-500 mt-2">Retry</Text>
       </TouchableOpacity>
     </View>;
   }
