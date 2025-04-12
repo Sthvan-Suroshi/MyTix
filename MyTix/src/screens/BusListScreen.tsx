@@ -34,7 +34,7 @@ const BusListScreen = () => {
 
   const renderItem = ({item}: {item: any}) => (
     <TouchableOpacity
-      className="bg-white mb-4 p-4 rounded-lg shadow-md"
+      className="bg-white mb-4 p-4 rounded-lg shadow-lg "
       onPress={() => navigate('SeatSelectionScreen', {busId: item?.busId})}>
       <Image
         source={require('../assets/images/sidebus.png')}
@@ -42,6 +42,36 @@ const BusListScreen = () => {
       />
       <Text className="text-lg font-bold text-gray-900">{item?.company}</Text>
       <Text className="text-sm text-gray-500">{item?.busType}</Text>
+
+      <View className="flex-row items-center justify-between">
+        <Text className="text-lg font-semibold text-gray-700">
+          {new Date(item.departureTime)?.toLocaleDateString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+          })}{' '}
+          -{' '}
+          {new Date(item.arrivalTime)?.toLocaleDateString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+          })}
+        </Text>
+
+        <Text className="text-sm text-gray-500">{item?.duration}</Text>
+      </View>
+
+      <View className="flex-row justify-between mt-2 items-center">
+        <Text className="text-md text-green-700 font-bold">
+          Rs {item?.price}/-
+        </Text>
+        <Text
+          className={`text-sm ${
+            item.availableSeats > 6 ? 'text-green-700' : 'text-red-700'
+          }`}>
+          {item.seats?.flat().filter((seat: any) => !seat.booked).length} Seats
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 
