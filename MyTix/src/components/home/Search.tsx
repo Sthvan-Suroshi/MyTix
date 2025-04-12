@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Alert,
-  Touchable,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
 import React, {useState} from 'react';
 import {navigate} from '../../utils/NavigationUtils';
 import LinearGradient from 'react-native-linear-gradient';
@@ -54,8 +47,14 @@ const Search = () => {
       );
       return;
     }
-    const today = new Date();
 
+    // Make sure date is not null before proceeding
+    if (!date) {
+      Alert.alert('Missing Information', 'Please select a date.');
+      return;
+    }
+
+    const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     if (date < today) {
@@ -63,7 +62,14 @@ const Search = () => {
       return;
     }
 
-    navigate('BusListScreen', {item: {from, to, date}});
+    // At this point, we know date is not null
+    navigate('BusListScreen', {
+      item: {
+        from,
+        to,
+        date: date.toISOString(), // Now this is safe
+      },
+    });
   };
 
   return (

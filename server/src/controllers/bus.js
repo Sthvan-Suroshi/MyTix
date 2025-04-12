@@ -33,13 +33,16 @@ export const searchBuses = async (req, res) => {
 
     const selectedDate = new Date(date);
 
-    const startOfDay = new Date(selectedDate.getHours(0, 0, 0, 0));
-    const endOfDay = new Date(selectedDate.getHours(23, 59, 59, 999));
+    const startOfDay = new Date(selectedDate);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(selectedDate);
+    endOfDay.setHours(23, 59, 59, 999);
 
     const buses = await Bus.find({
       from,
       to,
-      date: { $gte: startOfDay, $lte: endOfDay },
+      departureTime: { $gte: startOfDay, $lte: endOfDay },
     });
 
     return res.status(200).json({ success: true, data: buses });
