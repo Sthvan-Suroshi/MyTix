@@ -24,11 +24,13 @@ export const bookTicket = async ({
   date: string;
   seatNumbers: number[];
 }) => {
+  console.log('reached api call to book ticket');
+
   const {data} = await apiClient.post('/ticket/book', {
     busId,
     date,
     seatNumbers,
   });
 
-  return data?.ticket;
+  return data?.data;
 };

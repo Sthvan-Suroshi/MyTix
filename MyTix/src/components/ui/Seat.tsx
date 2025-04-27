@@ -45,8 +45,8 @@ const Seat: FC<{
               className="flex-row w-full justify-between items-center">
               <View className="flex-row w-full justify-between items-center">
                 {row?.map(s => {
-                  if (s.type == 'path') {
-                    <View key={s.seat_id} className="p-5 m-1 bg-red-300" />;
+                  if (s.type === 'path') {
+                    return <View key={s.seat_id} className="p-5 m-1" />;
                   }
 
                   return (

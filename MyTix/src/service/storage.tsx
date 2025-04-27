@@ -25,3 +25,8 @@ export const getRefreshToken = () => {
 export const deleteRefreshToken = () => {
   storage.delete('refreshToken');
 };
+
+export const clearTokens = () => {
+  deleteAccessToken();
+  deleteRefreshToken();
+};

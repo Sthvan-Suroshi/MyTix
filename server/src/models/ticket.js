@@ -9,8 +9,7 @@ const ticketSchema = new mongoose.Schema(
     },
 
     bus: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Bus",
+      type: "string",
       required: true,
     },
 

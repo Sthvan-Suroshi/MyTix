@@ -25,7 +25,8 @@ export const getUserTicket = async (req, res) => {
 export const bookTicekt = async (req, res) => {
   try {
     const { busId, date, seatNumbers } = req.body;
-    const userId = req.userId;
+
+    const userId = "680dfff0d21a870226cc24b2";
 
     if (!busId || !date || !seatNumbers) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -47,11 +48,11 @@ export const bookTicekt = async (req, res) => {
       bus.seats?.find((row) => row.some((seat) => seat.seat_id === seatNum && seat.booked))
     );
 
-    if (unavailableSeats.length > 0) {
+    if (unavailableSeats?.length > 0) {
       return res.status(400).json({ error: `Seats ${unavailableSeats} are already booked` });
     }
 
-    const total_fare = bus.price * seatNumbers.length;
+    const total_fare = bus.price * seatNumbers?.length;
 
     const newTicket = new Ticket({
       user: userId,

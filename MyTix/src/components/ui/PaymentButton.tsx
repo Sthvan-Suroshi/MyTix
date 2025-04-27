@@ -38,7 +38,7 @@ const PaymentButton: FC<{
       <TouchableOpacity
         onPress={onPay}
         className="bg-tertiary my-4 rounded-xl justify-center items-center p-3">
-        <Text className="bg-white font-semibold text-xl font-okra">
+        <Text className="text-white font-semibold text-xl font-okra">
           Pay Now!
         </Text>
       </TouchableOpacity>

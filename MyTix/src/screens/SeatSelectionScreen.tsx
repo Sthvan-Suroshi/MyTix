@@ -67,8 +67,9 @@ const SeatSelectionScreen = () => {
   };
 
   const handelOnPay = () => {
-    if (selectedSeats.length === 0) {
+    if (selectedSeats?.length === 0) {
       Alert.alert('Please select at least one seat to book a ticket.');
+      return;
     }
 
     bookTicketMutation.mutate({
@@ -217,31 +218,28 @@ const SeatSelectionScreen = () => {
       {ticketVisible && (
         <TicketModal
           bookingInfo={{
-            from: busInfo?.bus?.from,
-            to: busInfo?.bus?.to,
-            departureTime: new Date(
-              busInfo?.bus.departureTime,
-            ).toLocaleDateString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-            }),
-            arrivalTime: new Date(busInfo?.bus.arrivalTime).toLocaleDateString(
+            from: busInfo?.from,
+            to: busInfo?.to,
+            departureTime: new Date(busInfo?.departureTime).toLocaleDateString(
               [],
               {
                 hour: '2-digit',
                 minute: '2-digit',
               },
             ),
-            date: new Date(busInfo?.bus.departureTime).toLocaleTimeString(),
-            busType: busInfo?.bus?.busType,
-            company: busInfo?.bus?.company,
+            arrivalTime: new Date(busInfo?.arrivalTime).toLocaleDateString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+            }),
+            date: new Date(busInfo?.departureTime).toLocaleTimeString(),
+            busType: busInfo?.busType,
+            company: busInfo?.company,
             seats: bookTicketMutation.data?.seatNumbers,
             ticketNumber: bookTicketMutation?.data?._id || 'xxxxxxxxx',
             pnr: busInfo?.pnr || 'PNR12345678',
-            fare: busInfo?.bus?.total_fare,
+            fare: busInfo?.total_fare,
           }}
           onClose={() => {
-            resetAndNavigate('HomeScreen');
             setTicketVisible(false);
           }}
           visible={ticketVisible}
